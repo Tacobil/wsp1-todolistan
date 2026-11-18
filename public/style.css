@@ -1,7 +1,48 @@
 body {
   font-family: sans-serif;
-  color: #666;
-  background-color: #f1f1f1;
+  color: #faf8f8;
+  background-color: #463fb0;
   font-size: x-large;
   margin: 1em;
 }
+
+#wrapper {
+  display: grid;
+  grid-template-areas: 
+  "nv nv"
+  "mn as";
+  grid-template-columns: 3fr 2fr;
+  gap: 1em;
+}
+
+.adding-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+nav {
+  grid-area: nv;
+  background-color: #7194df;
+  padding: 0.5em;
+}
+
+main {
+  grid-area: mn;
+  background-color: rgb(55, 121, 214);
+  padding: 0.5em;
+  padding-top: 0;
+}
+
+.todo {
+  display: flex;
+  flex-direction: column;
+}
+
+aside {
+  grid-area: as;
+  background-color: maroon;
+  padding: 0.5em;
+  padding-top: 0;
+}
+
