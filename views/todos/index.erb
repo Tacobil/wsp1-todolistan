@@ -1,43 +1,44 @@
 <!-- Main content -->
 <main>
     <h1>Todo</h1>
-    <% [{"id" => 1, "name" => "Pannkakor", "description" => "köp och baka"}].each do |todo| %>
-    <div class="todo">
-        <h2><%=todo["name"]%></h2>
-        <p><%=todo["description"]%></p>
-        <p>kategori</p>
+    <% @todos.each do |todo| %>
+    <div class="todo <%= "completed" if todo["status"] == 1 %>">
+        <a href="/todos/<%= todo["id"] %>"><h2><%= todo["name"] %></h2></a>
+        <p><%= todo["description"] %></p>
+        <p><%= todo["category_name"] %></p>
 
         <div>
-            <form action="/todos/<%=todo["id"]%>/delete" method="post">
+            <form action="/todos/<%= todo["id"] %>/delete" method="post">
                 <input type="submit" value="Ta bort">
             </form>
 
-            <form action="/todos/<%=todo["id"]%>/status" method="post">
+            <form action="/todos/<%= todo["id"] %>/status" method="post">
                 <input type="submit" value="Färdig">
             </form>
 
-            <a href="todos/<%=todo["id"]%>/edit"><input type="submit" value="Ändra"></a>
+            <a href="todos/<%= todo["id"] %>/edit"><input type="submit" value="Ändra"></a>
         </div>
     </div>
-    <%end %>
+    <% end %>
 </main>
 
 <!-- New todos -->
 <aside>
     <h1>Ny ToDo</h1>
     <div class="rahh">
-        <form class="adding-form" action="/" method="post">
-            <label for="title">Titel</label>
-            <input type="text" id="title" name="todo_title">
+        <form class="adding-form" action="/todos" method="post">
+            <label for="todo-name">Titel</label>
+            <input type="text" id="todo-name" name="todo_name">
             
-            <label for="desc">Beskrivning</label>
-            <input type="text" id="desc" name="todo_desc">
+            <label for="todo-desc">Beskrivning</label>
+            <input type="text" id="todo-desc" name="todo_description">
             
             <div>
                 <label for="category">Kategori</label>
                 <select id="category" name="todo_category_id">
-                    <option value="Kategori 1">kategori 1</option>
-                    <option value="57">57</option>
+                    <% @categories.each do |category| %>
+                        <option value="<%= category["id"] %>"><%= category["name"] %></option>
+                    <% end %>
                 </select>
             </div>
             
